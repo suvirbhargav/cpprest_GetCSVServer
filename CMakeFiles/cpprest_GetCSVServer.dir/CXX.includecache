@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/Users/suvirb/CLionProjects/cpprest_GetCSVServer/src/handler.cpp
+handler.h
+/Users/suvirb/CLionProjects/cpprest_GetCSVServer/src/handler.h
+
 /Users/suvirb/CLionProjects/cpprest_GetCSVServer/src/handler.h
 iostream
 -
@@ -13,10 +17,6 @@ cpprest/http_listener.h
 -
 cpprest/filestream.h
 -
-
-/Users/suvirb/CLionProjects/cpprest_GetCSVServer/src/main.cpp
-handler.h
-/Users/suvirb/CLionProjects/cpprest_GetCSVServer/src/handler.h
 
 /usr/local/include/boost/array.hpp
 boost/detail/workaround.hpp
