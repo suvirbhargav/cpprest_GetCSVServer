@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     }
 
     utility::string_t address = U("http://127.0.0.1:");
-    address.append(port + "/v1/spectrum/sample.csv");
+    address.append(port + "/v1/");
 
     on_initialize(address);
     std::cout << "Press ENTER to exit." << std::endl;
