@@ -3,6 +3,10 @@
 //
 #include "handler.h"
 
+const string FOLDERNAME = "spectrum";
+const string FILENAME = "sample.csv";
+
+
 handler::handler() {
     //ctor
 }
@@ -31,28 +35,15 @@ void handler::handle_error(pplx::task<void> &t) {
 //
 void handler::handle_get(http_request message) {
     ucout << message.to_string() << endl;
-
-    auto paths = http::uri::split_path(http::uri::decode(message.relative_uri().path()));
-
-    message.relative_uri().path();
-
-    ucout << "message looks like "  << message.to_string() << endl;
-    ucout << "message path : "  << message.relative_uri().path() << endl;
-
     auto path = uri::split_path(uri::decode(message.relative_uri().path()));
 
-    ucout << "path[0] : "  << path[0] << endl;
-    ucout << "path[1] : "  << path[1] << endl;
-
-
-    if (path.size() == 2 && path[0] == "spectrum" && path[1] == "sample.csv") {
+    if (path.size() == 2 && path[0] == FOLDERNAME && path[1] == FILENAME) {
 
         concurrency::streams::fstream::open_istream(message.relative_uri().path(), std::ios::in).then(
                 [=](concurrency::streams::istream is) {
                     web::http::http_response response(web::http::status_codes::OK);
                     response.headers().set_content_type(U("application/text"));
-                    response.headers().add(U("Content-Disposition"),U("inline; filename = \"") + path[1] + U("\""));
-                    response.headers().set_content_length(3495423);
+                    response.headers().add(U("Content-Disposition"), U("inline; filename = \"") + path[1] + U("\""));
                     response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
                     response.set_body(std::move(is), U("application/text"));
 
@@ -78,11 +69,6 @@ void handler::handle_get(http_request message) {
     } else {
         message.reply(status_codes::NotFound);
     }
-
-
-    string_t file_name = message.relative_uri().path().substr(9,10);//"sample.csv";
-
-
 
     return;
 
