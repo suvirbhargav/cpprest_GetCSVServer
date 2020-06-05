@@ -41,7 +41,7 @@ void handler::handle_get(http_request message) {
 
         concurrency::streams::fstream::open_istream(message.relative_uri().path(), std::ios::in).then(
                 [=](concurrency::streams::istream is) {
-                    web::http::http_response response(web::http::status_codes::OK);
+                    http_response response(status_codes::OK);
                     response.headers().set_content_type(U("application/text"));
                     response.headers().add(U("Content-Disposition"), U("inline; filename = \"") + path[1] + U("\""));
                     response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
@@ -67,11 +67,15 @@ void handler::handle_get(http_request message) {
             }
         });
     } else {
-        message.reply(status_codes::NotFound);
+        http_response response(status_codes::NotFound);
+        response.headers().add(U("Access-Control-Allow-Origin"), U("*"));
+        message.reply(response);
+
     }
 
     return;
 
 };
+
 
 
