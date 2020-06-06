@@ -4,8 +4,6 @@
 #include "handler.h"
 
 const string FOLDERNAME = "spectrum";
-const string FILENAME = "sample.csv";
-
 
 handler::handler() {
     //ctor
@@ -29,6 +27,13 @@ void handler::handle_error(pplx::task<void> &t) {
     }
 }
 
+//
+// Check if file exists
+//
+inline bool handler::exists_test (const std::string& name) {
+    struct stat buffer;
+    return (stat (name.c_str(), &buffer) == 0);
+}
 
 //
 // Get Request
@@ -37,9 +42,9 @@ void handler::handle_get(http_request message) {
     ucout << message.to_string() << endl;
     auto path = uri::split_path(uri::decode(message.relative_uri().path()));
 
-    if (path.size() == 2 && path[0] == FOLDERNAME && path[1] == FILENAME) {
+    if (path.size() == 2 && path[0] == FOLDERNAME && exists_test(message.relative_uri().path())) {
 
-        concurrency::streams::fstream::open_istream(message.relative_uri().path(), std::ios::in).then(
+            concurrency::streams::fstream::open_istream(message.relative_uri().path(), std::ios::in).then(
                 [=](concurrency::streams::istream is) {
                     http_response response(status_codes::OK);
                     response.headers().set_content_type(U("application/text"));

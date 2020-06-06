@@ -35,6 +35,8 @@ private:
 
     void handle_error(pplx::task<void>& t);
     http_listener m_listener;
+
+    bool exists_test(const string &name);
 };
 
 #endif //CPPREST_GETCSV_HANDLER_H
