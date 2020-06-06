@@ -1,7 +1,12 @@
-## cpprest based server, serving csv file
+## Simple cpprestsdk based server, serving csv file
 cpprest based server serving get request and returns csv file in response.
+<<<<<<< Updated upstream
 Tested on Ubuntu 20.04 and mac.
+=======
+Place the csv files in spectrum folder. Tested on Ubuntu 20.04.
+>>>>>>> Stashed changes
 
+It only supports a get api at the moment.
 
 ### On Ubuntu 20.04
 First, install the package needed.
