@@ -1,6 +1,6 @@
 ## cpprest based server, serving csv file
 cpprest based server serving get request and returns csv file in response.
-Tested on Ubuntu 20.04.
+Tested on Ubuntu 20.04 and mac.
 
 
 ### On Ubuntu 20.04
